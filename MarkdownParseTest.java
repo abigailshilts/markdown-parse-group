@@ -21,9 +21,9 @@ public class MarkdownParseTest {
 
     @Test
     public void testFile5() throws IOException {
-        String contents= Files.readString(Path.of("/Users/abigailshilts/Documents/GitHub/markdown-parse-group/test-file5.md"));
+        String contents= Files.readString(Path.of("./test-file5.md"));
         List<String> expect = List.of();
-        assertEquals(expect, MarkdownParse.getLinks(contents));
+        assertEquals(expect, MarkdownParse.getLinks(contents)); 
     }
 
     @Test
