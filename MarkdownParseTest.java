@@ -20,6 +20,13 @@ public class MarkdownParseTest {
     }
 
     @Test
+    public void testFile6() throws IOException {
+        String contents= Files.readString(Path.of("/Users/abigailshilts/Documents/GitHub/markdown-parse-group/test-file5.md"));
+        List<String> expect = List.of();
+        assertEquals(expect, MarkdownParse.getLinks(contents));
+    }
+
+    @Test
     public void subtraction(){
         assertEquals(7, 9-2);
     }
