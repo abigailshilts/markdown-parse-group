@@ -27,7 +27,7 @@ public class MarkdownParseTest {
     }
 
     @Test
-    public void subtraction(){}
+    public void subtraction(){
         assertEquals(7, 9-2);
     }
     
