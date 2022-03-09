@@ -30,5 +30,25 @@ public class MarkdownParseTest {
     public void subtraction(){
         assertEquals(7, 9-2);
     }
+
+    /*@Test
+    public void testCodeSnippet1() throws IOException{
+        String contents = Files.readString(Path.of("/Users/abigailshilts/Documents/GitHub/markdown-parse-group/test-file-labReport1.md"));
+        List<String> expect = List.of("google.com", "google.com", "ucsd.edu");
+        assertEquals(expect, MarkdownParse.getLinks(contents)); 
+    }*/
     
+   /* @Test
+    public void testCodeSnippet2() throws IOException{
+        String contents = Files.readString(Path.of("/Users/abigailshilts/Documents/GitHub/markdown-parse-group/test-file-labReport2.md"));
+        List<String> expect = List.of("a.com", "a.com(())", "example.com");
+        assertEquals(expect, MarkdownParse.getLinks(contents)); 
+    } */
+
+    @Test
+    public void testCodeSnippet3() throws IOException{
+        String contents = Files.readString(Path.of("/Users/abigailshilts/Documents/GitHub/markdown-parse-group/test-file-labReport3.md"));
+        List<String> expect = List.of("twitter.com", "https://ucsd-cse15l-w22.github.io/", "https://cse.ucsd.edu/");
+        assertEquals(expect, MarkdownParse.getLinks(contents)); 
+    }
 }

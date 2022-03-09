@@ -4,37 +4,29 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class MarkdownParse {
+public class MdpJoe {
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
+        // find the next [, then find the ], then find the (, then take up to
+        // the next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
+            System.out.format("%d\t%d\t%s\n", currentIndex, nextOpenBracket, toReturn);
             int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
             int openParen = markdown.indexOf("(", nextCloseBracket);
             int closeParen = markdown.indexOf(")", openParen);
-
-            /*boolean noMore = false;
-            int currOpenParen = openParen;
-            while(!noMore){
-                System.out.println("in currOpenWhile");
-                if(markdown.substring(currOpenParen +1, closeParen).contains("(")){
-                    closeParen = markdown.indexOf(")", closeParen +1);
-                    currOpenParen = markdown.indexOf("(", currOpenParen +1);
-                }
-                else{
-                    noMore = true;
-                }
-            }*/
-            if (openParen != -1 && closeParen > openParen && closeParen != -1 && 
-                markdown.substring(openParen -1, openParen).equals("]")) {
-                toReturn.add(markdown.substring(openParen + 1, closeParen));
-                currentIndex = closeParen + 1;
-            } else {
-                currentIndex = nextCloseBracket + 1;
+            if(nextOpenBracket == -1 || nextCloseBracket == -1
+                  || closeParen == -1 || openParen == -1) {
+                return toReturn;
             }
-            if (markdown.indexOf("[", currentIndex) == -1 || markdown.length() < 4) {
-                currentIndex = markdown.length() + 1;
+            String potentialLink = markdown.substring(openParen + 1, closeParen);
+            if(potentialLink.indexOf(" ") == -1 && potentialLink.indexOf("\n") == -1) {
+                toReturn.add(potentialLink);
+                currentIndex = closeParen + 1;
+            }
+            else {
+                currentIndex = currentIndex + 1;
             }
         }
         return toReturn;
